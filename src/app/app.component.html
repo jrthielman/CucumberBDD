@@ -2,7 +2,7 @@
   <input [(ngModel)]="color" placeholder="color"/>
   <button (click)="saveColor()">save</button>
   <button (click)="resetColor()">reset</button>
-  <p [ngStyle]="color == 'white' && {'color' : 'black'} || {'color' : 'white'}">{{color}}</p>
+  <p [ngStyle]="color == 'white' && {'color' : 'white'} || {'color' : 'black'}">{{color}}</p>
 </div>
 <div class="subscribe-container">
   <div class="subscribe-form-box">
@@ -30,7 +30,7 @@
           <mat-form-field appearance="outline">
             <mat-label>Phone number</mat-label>
             <input matInput placeholder="Phone number"
-            name="phonenumber" type="number" [(ngModel)]="subscribeForm.phoneNumber">
+            name="phonenumber" type="tel" [(ngModel)]="subscribeForm.phoneNumber">
             <mat-icon matSuffix>smartphone</mat-icon>
           </mat-form-field>
         </li>
@@ -61,12 +61,14 @@
         </li>
       </ul>
       <div class="submit-box">
-        <h4>Fill in this form and subscribe for this page</h4>
-        <button mat-button name="subscribe-submit" type="submit"
+        <h4>Fill in this form and subscribe to this page</h4>
+        <button mat-button name="subscribe-submit"
         [disabled]="!subscribeForm.firstName || 
                     !subscribeForm.surname ||
                     !subscribeForm.emailAddress"
-                    (click)="submit()">submit</button>
+                    (click)="submit()">
+          submit
+        </button>
       </div>
     </form>
   </div>

@@ -31,6 +31,7 @@ exports.config = {
   baseUrl: 'http://localhost:4200/',
   frameworkPath: require.resolve('../node_modules/protractor-cucumber-framework'),
   framework: 'custom',
+  seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
   cucumberOpts: {
     require: ['./src/steps/**/*.steps.ts'],
     format: "json:tmp/results.json",
@@ -50,5 +51,6 @@ exports.config = {
     require('ts-node').register({
       project: require('path').join(__dirname, './tsconfig.e2e.json')
     });
+    browser.driver.manage().window().maximize();
   },
 };

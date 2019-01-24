@@ -1,8 +1,8 @@
-import { Before, When, Given} from 'cucumber';
+import { Before, When, Given, Then} from 'cucumber';
 import { expect } from 'chai';
 
 import { SubscribeFormPage } from '../pages/subscribeform';
-import { browser } from 'protractor';
+import { browser, Key } from 'protractor';
 
 let subscribeFormPage: SubscribeFormPage;
 
@@ -12,17 +12,33 @@ Before(() =>{
 
 Given('I am on the subscribe page', async () => {
     await subscribeFormPage.navigateTo();
-})
+});
 
-When("I fill in everything except my email", async () => {
+When("I fill everything in except my email", async () => {
     await subscribeFormPage.getFirstNameInput().sendKeys("firstname").then(function (){
         subscribeFormPage.getSurnameInput().sendKeys("surname").then(function () {
             subscribeFormPage.getPhoneNumberInput().sendKeys("12345678").then(function () {
                 subscribeFormPage.getAddressInput().sendKeys("jusreizaplein 80").then(function () {
-                    subscribeFormPage.getPostalCodeInput().sendKeys("1000 AA").then(function () {
-                        subscribeFormPage.getSubmitButton().isEnabled().then(function () {
-                            
-                        })
+                    subscribeFormPage.getPostalCodeInput().sendKeys("1000 AA");
+                });
+            });
+        });
+    });
+});
+
+Then(/^The submit button will be disabled: "(.*)"$/, (disabled, callback) => {
+    subscribeFormPage.isSumbitButtonDisabled().then(function (attr){
+        expect(attr).to.equal(disabled);
+    }).then(callback);
+});
+
+When("I fill everything in on the form", async () => {
+    await subscribeFormPage.getFirstNameInput().sendKeys("firstname").then(function (){
+        subscribeFormPage.getSurnameInput().sendKeys("surname").then(function () {
+            subscribeFormPage.getPhoneNumberInput().sendKeys("12345678").then(function () {
+                subscribeFormPage.getEmailInput().sendKeys("my@mail.nl").then(function () {
+                    subscribeFormPage.getAddressInput().sendKeys("jusreizaplein 80").then(function () {
+                        subscribeFormPage.getPostalCodeInput().sendKeys("1000 AA");
                     });
                 });
             });
@@ -30,19 +46,45 @@ When("I fill in everything except my email", async () => {
     });
 });
 
+When("I remove the email address i entered", async () =>{
+    await subscribeFormPage.getEmailInput().clear().then(function () {
+        subscribeFormPage.getEmailInput().sendKeys(" ");
+        subscribeFormPage.getEmailInput().sendKeys(Key.BACK_SPACE);
+    });
+});
 
+Then(/^I will see an error to enter my email "(.*)"$/, (error, callback) => {
+    subscribeFormPage.getEmailError().getText().then(function (val){
+        expect(val).to.equal(error);
+    }).then(callback);
+});
 
-// Given('I am on the home page', async () => {
-//     await page.navigateTo();
+When(/^I fill in my email in the wrong format: "(.*)$/, (emailVal, callback) =>{
+    subscribeFormPage.getEmailInput().sendKeys(emailVal).then(function (){
+        subscribeFormPage.getSubmitButton().click();
+    }).then(callback);
+});
+
+Then(/^I will see an email not valid error "(.*)"$/, (error, callback) => {
+    subscribeFormPage.getEmailError().getText().then(function (val) {
+        expect(val).to.equal(error);
+    }).then(callback);
+});
+
+Then(/^The submit button enabled is "(.*)" and error will still read "(.*)"$/, (disabled, error, callback) =>{
+    subscribeFormPage.isSumbitButtonDisabled().then(function (attr){
+        expect(attr).to.equal(disabled);
+        subscribeFormPage.getSubmitButton().click().then(function (){
+            subscribeFormPage.getEmailError().getText().then(function (val){
+                expect(val).to.equal(error);
+            });
+        });
+    }).then(callback);
+});
+
+// Given(/^I go "([^"]*)"$/, (val, callback) => {
+//     subscribeFormPage.getFirstNameInput().sendKeys(val);
 // });
-
-// When('I type something into the textfield', async () => {
-//     await page.getInputField().sendKeys("I jus typed something");
-// });
-
-// Then('The text i input should appear below it', async () => {
-//     expect(await page.getParagraph().getText()).to.equal("I just typed something");
-// })
 
 function chill(ms: number){
     browser.sleep(ms*1000);

@@ -1,4 +1,4 @@
-import { browser, by, element, ElementFinder, ElementArrayFinder } from 'protractor';
+import { browser, by, element, ElementFinder, ElementArrayFinder, promise, $ } from 'protractor';
 
 export class SubscribeFormPage {
   navigateTo() {
@@ -12,6 +12,11 @@ export class SubscribeFormPage {
   getSubscribeForm(): ElementFinder{
     return this.getSubscribeFormBox()
     .element(by.name("subscribe-form"));
+  }
+
+  getSubscribeFormValues(): ElementArrayFinder{
+    return this.getSubscribeForm().element(by.css("ul"))
+    .all(by.css("li"));
   }
 
   getFirstNameInput(): ElementFinder{
@@ -30,6 +35,11 @@ export class SubscribeFormPage {
     return element(by.name("email"));
   }
 
+  getEmailError(): ElementFinder{
+    return this.getSubscribeFormValues().get(3)
+    .element(by.css("mat-error"));
+  }
+
   getAddressInput(): ElementFinder{
     return element(by.name("address"));
   }
@@ -40,6 +50,10 @@ export class SubscribeFormPage {
 
   getSubmitButton(): ElementFinder{
     return element(by.name("subscribe-submit"));
+  }
+
+  isSumbitButtonDisabled(): promise.Promise<string>{
+    return element(by.name("subscribe-submit")).getAttribute('ng-reflect-disabled');
   }
 
 
