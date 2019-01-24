@@ -1,28 +1,54 @@
 // Protractor configuration file, see link for more information
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 
-const { SpecReporter } = require('jasmine-spec-reporter');
-
 exports.config = {
   allScriptsTimeout: 11000,
   specs: [
-    './src/**/*.e2e-spec.ts'
+    './src/features/**/*.feature'
   ],
-  capabilities: {
-    'browserName': 'chrome'
-  },
+  multiCapabilities: [
+    {
+      browserName: "chrome",
+      shardTestFiles: true,
+      maxInstances: 2,
+      chromeOptions: {
+        args: ["disable-infobars"]
+      },
+      metadata: {
+        browser: {
+            name: 'chrome',
+            version: '58'
+        },
+        device: 'Dell XPS 15',
+        platform: {
+            name: 'Windows',
+            version: '10'
+        }
+      }
+    }
+  ],
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
-  framework: 'jasmine',
-  jasmineNodeOpts: {
-    showColors: true,
-    defaultTimeoutInterval: 30000,
-    print: function() {}
+  frameworkPath: require.resolve('../node_modules/protractor-cucumber-framework'),
+  framework: 'custom',
+  cucumberOpts: {
+    require: ['./src/steps/**/*.steps.ts'],
+    format: "json:tmp/results.json",
+    strict: true
   },
+  plugins: [
+    {
+      package: "protractor-simple-cucumber-html-reporter-plugin",
+      options: {
+        automaticallyGenerateReport: true,
+        removeExistingJsonReportFile: true,
+        reportName: "Angular BDD exercise with cucumber"
+      }
+    }
+  ],
   onPrepare() {
     require('ts-node').register({
       project: require('path').join(__dirname, './tsconfig.e2e.json')
     });
-    jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
-  }
+  },
 };
