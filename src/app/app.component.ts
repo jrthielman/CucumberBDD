@@ -21,7 +21,6 @@ export class AppComponent implements OnInit{
   ngOnInit(){
     this.color = sessionStorage.getItem("colorValue");
     if(sessionStorage.length > 0){
-      let subscriber = JSON.parse(sessionStorage.getItem("subscriber"));
       sessionStorage.removeItem("subscriber");
     }
   }

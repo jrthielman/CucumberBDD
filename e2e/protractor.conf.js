@@ -29,9 +29,9 @@ exports.config = {
   ],
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
-  frameworkPath: require.resolve('../node_modules/protractor-cucumber-framework'),
+  frameworkPath: require.resolve('protractor-cucumber-framework'),
   framework: 'custom',
-  seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
+  seleniumAddress: 'http://localhost:4444/wd/hub',
   cucumberOpts: {
     require: ['./src/steps/**/*.steps.ts'],
     format: "json:tmp/results.json",
@@ -53,4 +53,5 @@ exports.config = {
     });
     browser.driver.manage().window().maximize();
   },
+  
 };

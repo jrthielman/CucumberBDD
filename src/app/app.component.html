@@ -1,75 +1,77 @@
-<div class="color-box" [ngStyle]="{'background' : color}" style="padding: 50px; position:absolute">
-  <input [(ngModel)]="color" placeholder="color"/>
-  <button (click)="saveColor()">save</button>
-  <button (click)="resetColor()">reset</button>
-  <p [ngStyle]="color == 'white' && {'color' : 'white'} || {'color' : 'black'}">{{color}}</p>
-</div>
-<div class="subscribe-container">
-  <div class="subscribe-form-box">
-    <form name="subscribe-form">
-      <ul>
-        <li>
-          <mat-form-field appearance="outline">
-            <mat-label>Firstname</mat-label>
-            <input matInput placeholder="Firstname" required
-            name="firstname" type="text" [formControl]="firstName" [(ngModel)]="subscribeForm.firstName"/>
-            <mat-icon matSuffix>person</mat-icon>
-            <mat-error *ngIf="firstName.invalid">{{getFirstNameErrorMessage()}}</mat-error>
-          </mat-form-field>
-        </li>
-        <li>
-          <mat-form-field appearance="outline">
-            <mat-label>Surname</mat-label>
-            <input matInput placeholder="Surname" required
-            name="surname" type="text" [formControl]="surname" [(ngModel)]="subscribeForm.surname"/>
-            <mat-icon matSuffix>person</mat-icon>
-            <mat-error *ngIf="surname.invalid">{{getSurnameErrorMessage()}}</mat-error>
-          </mat-form-field>
-        </li>
-        <li>
-          <mat-form-field appearance="outline">
-            <mat-label>Phone number</mat-label>
-            <input matInput placeholder="Phone number"
-            name="phonenumber" type="tel" [(ngModel)]="subscribeForm.phoneNumber">
-            <mat-icon matSuffix>smartphone</mat-icon>
-          </mat-form-field>
-        </li>
-        <li>
-          <mat-form-field appearance="outline">
-            <mat-label>E-mail address</mat-label>
-            <input matInput placeholder="E-mail" required
-            name="email" [formControl]="email" [(ngModel)]="subscribeForm.emailAddress"/>
-            <mat-icon matSuffix>alternate_email</mat-icon>
-            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
-        </li>
-        <li>
-          <mat-form-field appearance="outline">
-            <mat-label>Post address</mat-label>
-            <input matInput placeholder="Post address"
-            name="address" type="text" [(ngModel)]="subscribeForm.address"/>
-            <mat-icon matSuffix>location_city</mat-icon>
-          </mat-form-field>
-        </li>
-        <li>
-          <mat-form-field  appearance="outline">
-            <mat-label>Postal code</mat-label>
-            <input matInput placeholder="Postal code"
-            name="postalcode" type="text" [(ngModel)]="subscribeForm.postalCode"/>
-            <mat-icon matSuffix>domain</mat-icon>
-          </mat-form-field>
-        </li>
-      </ul>
-      <div class="submit-box">
-        <h4>Fill in this form and subscribe to this page</h4>
-        <button mat-button name="subscribe-submit"
-        [disabled]="!subscribeForm.firstName || 
-                    !subscribeForm.surname ||
-                    !subscribeForm.emailAddress"
-                    (click)="submit()">
-          submit
-        </button>
-      </div>
-    </form>
+<div class="color-box" [ngStyle]="{'background' : color}">
+  <div class="color-element-holder">
+    <input [(ngModel)]="color" placeholder="color"/>
+    <button (click)="saveColor()">save</button>
+    <button (click)="resetColor()">reset</button>
+  </div>
+  <!-- <p [ngStyle]="color == 'white' && {'color' : 'white'} || {'color' : 'black'}">{{color}}</p> -->
+  <div class="subscribe-container">
+    <div class="subscribe-form-box">
+      <form name="subscribe-form">
+        <ul>
+          <li>
+            <mat-form-field appearance="outline">
+              <mat-label>Firstname</mat-label>
+              <input matInput placeholder="Firstname" required
+              name="firstname" type="text" [formControl]="firstName" [(ngModel)]="subscribeForm.firstName"/>
+              <mat-icon matSuffix>person</mat-icon>
+              <mat-error *ngIf="firstName.invalid">{{getFirstNameErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </li>
+          <li>
+            <mat-form-field appearance="outline">
+              <mat-label>Surname</mat-label>
+              <input matInput placeholder="Surname" required
+              name="surname" type="text" [formControl]="surname" [(ngModel)]="subscribeForm.surname"/>
+              <mat-icon matSuffix>person</mat-icon>
+              <mat-error *ngIf="surname.invalid">{{getSurnameErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </li>
+          <li>
+            <mat-form-field appearance="outline">
+              <mat-label>Phone number</mat-label>
+              <input matInput placeholder="Phone number"
+              name="phonenumber" type="tel" [(ngModel)]="subscribeForm.phoneNumber">
+              <mat-icon matSuffix>smartphone</mat-icon>
+            </mat-form-field>
+          </li>
+          <li>
+            <mat-form-field appearance="outline">
+              <mat-label>E-mail address</mat-label>
+              <input matInput placeholder="E-mail" required
+              name="email" [formControl]="email" [(ngModel)]="subscribeForm.emailAddress"/>
+              <mat-icon matSuffix>alternate_email</mat-icon>
+              <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </li>
+          <li>
+            <mat-form-field appearance="outline">
+              <mat-label>Post address</mat-label>
+              <input matInput placeholder="Post address"
+              name="address" type="text" [(ngModel)]="subscribeForm.address"/>
+              <mat-icon matSuffix>location_city</mat-icon>
+            </mat-form-field>
+          </li>
+          <li>
+            <mat-form-field  appearance="outline">
+              <mat-label>Postal code</mat-label>
+              <input matInput placeholder="Postal code"
+              name="postalcode" type="text" [(ngModel)]="subscribeForm.postalCode"/>
+              <mat-icon matSuffix>domain</mat-icon>
+            </mat-form-field>
+          </li>
+        </ul>
+        <div class="submit-box">
+          <h4>Fill in this form and subscribe to this page</h4>
+          <button mat-button name="subscribe-submit"
+          [disabled]="!subscribeForm.firstName || 
+                      !subscribeForm.surname ||
+                      !subscribeForm.emailAddress"
+                      (click)="submit()">
+            submit
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

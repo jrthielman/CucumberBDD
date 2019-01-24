@@ -83,11 +83,11 @@ Then(/^The submit button enabled is "(.*)" and error will still read "(.*)"$/, (
 });
 
 When(/^I fill in the color (.*)$/, (color, callback) => {
-    element(by.css(".color-box")).element(by.css("input")).sendKeys(color).then(function(){
-        element(by.css(".color-box")).element(by.cssContainingText("button", "save")).click().then(function () {
+    element(by.css(".color-element-holder")).element(by.css("input")).sendKeys(color).then(function(){
+        element(by.css(".color-element-holder")).element(by.cssContainingText("button", "save")).click().then(function () {
+            element(by.cssContainingText("button", "reset")).click()
         })
-    });
-    element(by.css(".color-box")).element(by.css("input")).clear().then(callback)
+    }).then(callback);
 });
 
 // Given(/^I go "([^"]*)"$/, (val, callback) => {

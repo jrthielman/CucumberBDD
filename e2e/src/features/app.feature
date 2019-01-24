@@ -38,7 +38,12 @@ Feature: subscribe to page
     |   green       |
     |   purple      |
     |   turquoise   |
-    |   yellow      |
+    |   #BDF9FF     |
+    |   #33EEFF     |
+    |   #00CEE0     |
+    |   #00838F     |
+    |   #1D6B72     |
+    |   #9FD6DB     |
 
 
     # Scenario: passing a parameter
