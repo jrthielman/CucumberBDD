@@ -1,4 +1,4 @@
-<div [ngStyle]="{'background' : color}" style="padding: 50px; position:absolute">
+<div class="color-box" [ngStyle]="{'background' : color}" style="padding: 50px; position:absolute">
   <input [(ngModel)]="color" placeholder="color"/>
   <button (click)="saveColor()">save</button>
   <button (click)="resetColor()">reset</button>

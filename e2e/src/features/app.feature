@@ -28,6 +28,19 @@ Feature: subscribe to page
     Then I will see an email not valid error "Not a valid email"
     And The submit button enabled is "false" and error will still read "Not a valid email"
 
+    Scenario Outline: This is a real scenario
+    Given I am on the subscribe page
+    When I fill in the color <color>
+    Examples:
+    |   color       |
+    |   blue        |
+    |   black       |
+    |   green       |
+    |   purple      |
+    |   turquoise   |
+    |   yellow      |
+
+
     # Scenario: passing a parameter
     # Given I am on the subscribe page
     # When I go "nutssssssssssssssssss"

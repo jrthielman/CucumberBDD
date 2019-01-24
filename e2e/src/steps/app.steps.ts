@@ -2,7 +2,7 @@ import { Before, When, Given, Then} from 'cucumber';
 import { expect } from 'chai';
 
 import { SubscribeFormPage } from '../pages/subscribeform';
-import { browser, Key } from 'protractor';
+import { browser, Key, by, element } from 'protractor';
 
 let subscribeFormPage: SubscribeFormPage;
 
@@ -80,6 +80,14 @@ Then(/^The submit button enabled is "(.*)" and error will still read "(.*)"$/, (
             });
         });
     }).then(callback);
+});
+
+When(/^I fill in the color (.*)$/, (color, callback) => {
+    element(by.css(".color-box")).element(by.css("input")).sendKeys(color).then(function(){
+        element(by.css(".color-box")).element(by.cssContainingText("button", "save")).click().then(function () {
+        })
+    });
+    element(by.css(".color-box")).element(by.css("input")).clear().then(callback)
 });
 
 // Given(/^I go "([^"]*)"$/, (val, callback) => {
