@@ -31,7 +31,7 @@ exports.config = {
   baseUrl: 'http://localhost:4200/',
   frameworkPath: require.resolve('protractor-cucumber-framework'),
   framework: 'custom',
-  // seleniumAddress: 'http://localhost:4444/wd/hub',
+  seleniumAddress: 'http://localhost:4444/wd/hub',
   cucumberOpts: {
     require: ['./src/steps/**/*.steps.ts'],
     format: "json:tmp/results.json",

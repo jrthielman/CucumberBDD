@@ -1,8 +1,6 @@
 import { Before, When, Given, Then} from 'cucumber';
 
 import { SubscribeFormPage } from '../pages/subscribeform';
-import { browser, Key, by, element } from 'protractor';
-import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
 
 var chai = require('chai');
 var chaiAsPromised = require('chai-as-promised');
@@ -114,14 +112,6 @@ When(/^I fill in my "(.*)" and "(.*)"$/, function(username, email, callback){
 
 Then("I shouldn't be able to click the submit button", async () => {
     await expect(subscribeFormPage.isSumbitButtonDisabled()).to.eventually.equal("true");
-});
-
-Given(/^I got to "(.*)"$/, function(website, callback){
-    browser.get(website).then(function() {
-        browser.wait(function() {
-            expect(browser.getTitle()).to.eventually.equal("Google");
-        }, 1000);
-    }).then(callback);
 });
 
 

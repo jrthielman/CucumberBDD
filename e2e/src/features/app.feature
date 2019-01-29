@@ -50,9 +50,6 @@ Feature: subscribe to page
     When I fill in my "username" and "ditmail@mail.com"
     Then I shouldn't be able to click the submit button
 
-    Scenario: I try to google
-    Given I got to "https://google.com"
-
     # Scenario: passing a parameter
     # Given I am on the subscribe page
     # When I go "nutssssssssssssssssss"
