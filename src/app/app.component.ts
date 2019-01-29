@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { SubscribeForm } from './object/form';
-import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { FormControl, Validators, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { forbiddenNameValidator, validNameValidator } from './shared/user-name.validator';
-import { platform } from 'os';
+import { PasswordValidator } from './shared/password.validator';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +23,7 @@ export class AppComponent implements OnInit{
   //   })
   // });
 
+  registrationForm: FormGroup;
   subscribeForm: SubscribeForm = new SubscribeForm();
 
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -33,23 +34,39 @@ export class AppComponent implements OnInit{
 
   constructor(private fb: FormBuilder){}
 
-  // een alternatief voor de bovenstaande registrationform
-  registrationForm = this.fb.group({
-    userName: ['', [Validators.required, Validators.minLength(3), forbiddenNameValidator(/admin/), validNameValidator]],
-    password: [''],
-    confirmPassword: [''],
-    address: this.fb.group({
-      city: [''],
-      state: [''],
-      postalCode: ['']
-    })
-  });
-
   ngOnInit(){
     this.color = sessionStorage.getItem("colorValue");
     if(sessionStorage.length > 0){
       sessionStorage.removeItem("subscriber");
     }
+
+    // een alternatief voor de bovenstaande registrationform
+    this.registrationForm = this.fb.group({
+    userName: ['', [Validators.required, Validators.minLength(3), forbiddenNameValidator(/admin/), validNameValidator]],
+    password: [''],
+    confirmPassword: [''],
+    subscribeEmail: this.fb.group({
+      email: [''],
+      alternateEmails: this.fb.array([]),
+      subscribe: [false]
+    }),
+    address: this.fb.group({
+      city: [''],
+      state: [''],
+      postalCode: ['']
+    }),
+    },{validator : PasswordValidator});
+
+    this.registrationForm.get('subscribeEmail').get('subscribe').valueChanges
+    .subscribe(checkedValue => {
+      const email = this.registrationForm.get('subscribeEmail').get('email');
+      if(checkedValue){
+        email.setValidators(Validators.required);
+      }else{
+        email.clearValidators();
+      }
+      email.updateValueAndValidity();
+    });
   }
 
   private delay(ms: number)
@@ -58,14 +75,14 @@ export class AppComponent implements OnInit{
   }
 
   async getRandomColor() {
-    for(let i = 0; i < 500; i++){
+    for(let i = 0; i < 10; i++){
       let letters = '0123456789ABCDEF';
       let color = '#';
       for (let i = 0; i < 6; i++) {
         color += letters[Math.floor(Math.random() * 16)];
       }
       this.color = color;
-      await this.delay(3);
+      await this.delay(20);
     }
     this.saveColor();
   }
@@ -74,6 +91,27 @@ export class AppComponent implements OnInit{
     return this.registrationForm.get('userName');
   }
 
+  get email2(){
+    return this.registrationForm.get('subscribeEmail').get('email');
+  }
+
+  get alternateEmails(): FormArray{
+    return this.registrationForm.get('subscribeEmail').get('alternateEmails') as FormArray;
+  }
+
+  addAlternateEmail(){
+    this.alternateEmails.push(this.fb.control(''));
+  }
+
+  removeEmail(emailIndex){
+    this.alternateEmails.removeAt(emailIndex);
+  }
+
+  onSubmit(){
+    // dit geeft alle waardes uit het formulier
+    console.log(this.registrationForm.value);
+  }
+  
   loadApiData(): void{
     // je moet alles een waarde geven
     // this.registrationForm.setValue({

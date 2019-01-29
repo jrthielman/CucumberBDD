@@ -6,12 +6,27 @@
     display: none;
 }
 
+.bold{
+    font-weight: bold;
+    /* background: transparent;
+    border: none; */
+}
+
 .color-red{
     color:red;
 }
 
 .color-green{
     color:green;
+}
+
+.flex-box{
+    display: flex;
+}
+
+.grid-2{
+    display: grid;
+    grid-template-columns: 60% 40%;
 }
 
 .reactive-form{
