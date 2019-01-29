@@ -1,5 +1,4 @@
 import { browser, element, by, ElementFinder, ElementArrayFinder, $$ } from 'protractor';
-import { all } from 'q';
 
 export class GooglePage {
 
@@ -20,11 +19,11 @@ export class GooglePage {
     }
 
     getListOfLinksByNumber(): ElementArrayFinder {
-        return this.getListWithLinkLists().$$(".srg").$$(".g");
+        return this.getListWithLinkLists().$$(".g");
     }
 
     getLinkByNumber(itemIndex: number): ElementFinder {
         return this.getListOfLinksByNumber().get(itemIndex)
-        .element(by.css("a"));
+        .$("a");
     }
 }

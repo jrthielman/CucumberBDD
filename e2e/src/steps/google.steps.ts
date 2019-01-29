@@ -26,19 +26,26 @@ When(/^The title is "(.*)"$/, function (expectedTitle, callback) {
             expect(title).to.equal(expectedTitle);
         });
     }).then(callback);
-})
+});
 
-Then(/^I type "(.*)" into the search field and press enter$/, function (searchVal, callback){
+When(/^I type "(.*)" into the search field and press enter$/, function (searchVal, callback){
     googlePage.getSearchField().sendKeys(searchVal).then(function (){
         googlePage.getEnterButton().isPresent().then(function (){
             googlePage.getEnterButton().click();
         })
     }).then(callback);
-})
+});
 
-Then("I click on the second link available", async () => {
+When("I click on the second link available", async () => {
     let link = googlePage.getLinkByNumber(1);
     await browser.actions().mouseMove(link).perform().then(function (){
         link.click();
-    })
-})
+    });
+});
+
+Then(/^The title should read "(.*)"$/, function (expectedTitle, callback){
+    browser.getTitle().then(function (title){
+        expect(title).to.equal(expectedTitle);
+    }).then(callback);
+
+});
