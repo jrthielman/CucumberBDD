@@ -8,10 +8,15 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
+import { ReactiveformComponent } from './reactiveform/reactiveform.component';
+import { AppRoutingModule } from './app-routing.module';
+import { FormComponent } from './form/form.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ReactiveformComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +27,8 @@ import { AppComponent } from './app.component';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

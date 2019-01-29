@@ -1,0 +1,84 @@
+.subscribe-container{
+    min-height: 100vh;
+    justify-content: center;
+    display: flex;
+}
+
+.subscribe-form-box{
+    align-self: center;
+    background: rgb(245, 254, 255);
+    border: 5px solid rgb(0, 47, 51);
+    box-shadow: 10px 10px 20px 0px;
+    padding: 0px 20px 20px 20px;
+}
+
+.subscribe-form-box form .submit-box > button:nth-last-child(1){
+    margin-top: 10px;
+    padding: 10px;
+    
+}
+
+.submit-box{
+    display: flex;
+    align-items: center;
+}
+
+.submit-box h4{
+    border: 1px solid rgb(194, 194, 194);
+    padding: 10px;
+    background: rgb(214, 251, 255);
+}
+
+.submit-box > button:nth-of-type(1){
+    margin-left: auto;
+}
+
+.subscribe-form-box form ul{
+    list-style-type: none;
+    padding: 0px;
+    display: grid;
+    grid-gap: 10px 20px;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.color-element-holder{
+    position: absolute;
+    display: grid;
+    grid-template-columns: 100px 70px;
+    top: 20px;
+    left: 20px;
+}
+
+.color-element-holder > input:nth-of-type(1){
+    grid-column: span 2;
+}
+
+.color-element-holder > button:nth-of-type(1){
+    text-align: center;
+    grid-column: 1;
+    
+}
+
+.color-element-holder > button:nth-of-type(2){
+    text-align: center;
+    grid-column: 2;
+}
+
+@media only screen and (max-width: 600px){
+    
+    .submit-box > h4{
+        display: none;
+    }
+    
+    .subscribe-form-box form ul{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    
+    .subscribe-form-box form ul > li{
+        grid-column: 1;
+    }
+
+    .subscribe-form-box form .submit-box > button:nth-last-child(1){
+        width: 100%;
+    }
+}
