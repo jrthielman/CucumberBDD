@@ -20,18 +20,6 @@
           </div>
         </div>
 
-        <div>
-          <label>Password</label>
-          <input formControlName="password" type="password" class="form-control">
-        </div>
-
-        <div>
-          <label>Confirm password</label>
-          <input [class.is-invalid]="registrationForm.errors?.misMatch" formControlName="confirmPassword" type="password"
-            class="form-control">
-          <small class="color-red" *ngIf="registrationForm.errors?.misMatch">Password does not match</small>
-        </div>
-
         <div formGroupName="subscribeEmail">
           <div>
             <label>E-mail</label>
@@ -39,7 +27,7 @@
               <input [class.is-invalid]="email2.invalid && email2.touched" type="text" formControlName="email">
               <button (click)="addAlternateEmail()" type="button">Add e-mail</button>
             </div>
-            <small class="color-red" [class.d-none]="email2.valid || email2.untouched">E-mail is invalid</small>
+            <small class="color-red" [class.d-none]="email2.valid || email2.untouched || email2.email">E-mail is invalid</small>
             <div formArrayName="alternateEmails" *ngFor="let email of alternateEmails.controls; let i = index">
               <label>Alternate E-mail</label>
               <div class="flex-box">
@@ -53,6 +41,18 @@
             <input type="checkbox" formControlName="subscribe">
             <label>Send me promotional items</label>
           </div>
+        </div>
+
+        <div>
+          <label>Password</label>
+          <input formControlName="password" type="password" class="form-control">
+        </div>
+
+        <div>
+          <label>Confirm password</label>
+          <input [class.is-invalid]="registrationForm.errors?.misMatch" formControlName="confirmPassword" type="password"
+            class="form-control">
+          <small class="color-red" *ngIf="registrationForm.errors?.misMatch">Password does not match</small>
         </div>
 
         <div formGroupName="address">

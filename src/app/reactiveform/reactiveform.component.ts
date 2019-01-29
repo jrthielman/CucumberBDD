@@ -33,7 +33,7 @@ export class ReactiveformComponent implements OnInit {
       password: [''],
       confirmPassword: [''],
       subscribeEmail: this.fb.group({
-        email: [''],
+        email: ['', [Validators.email]],
         alternateEmails: this.fb.array([]),
         subscribe: [false]
       }),
@@ -78,6 +78,7 @@ export class ReactiveformComponent implements OnInit {
 
   onSubmit(){
     // dit geeft alle waardes uit het formulier
+    alert("check the console to see the form info")
     console.log(this.registrationForm.value);
   }
   
