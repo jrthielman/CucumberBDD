@@ -21,14 +21,14 @@ export class AppComponent implements OnInit{
   }
 
   async getRandomColor() {
-    for(let i = 0; i < 10; i++){
+    for(let i = 0; i < 50; i++){
       let letters = '0123456789ABCDEF';
       let color = '#';
       for (let i = 0; i < 6; i++) {
         color += letters[Math.floor(Math.random() * 16)];
       }
       this.color = color;
-      await this.delay(20);
+      await this.delay(50);
     }
     this.saveColor();
   }

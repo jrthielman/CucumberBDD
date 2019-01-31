@@ -16,13 +16,13 @@ exports.config = {
       },
       metadata: {
         browser: {
-            name: 'chrome',
-            version: '58'
+          name: 'chrome',
+          version: '58'
         },
         device: 'Dell XPS 15',
         platform: {
-            name: 'Windows',
-            version: '10'
+          name: 'Windows',
+          version: '10'
         }
       }
     }
@@ -31,18 +31,24 @@ exports.config = {
   baseUrl: 'http://localhost:4200/',
   frameworkPath: require.resolve('protractor-cucumber-framework'),
   framework: 'custom',
-  // seleniumAddress: 'http://localhost:4444/wd/hub',
   cucumberOpts: {
-    require: ['./src/steps/**/*.steps.ts'],
+    require: [
+      './src/steps/**/*.steps.ts',
+      './src/hooks/screenshots.ts'
+    ],
     format: "json:tmp/results.json",
     strict: true
   },
   plugins: [
     {
-      package: "protractor-simple-cucumber-html-reporter-plugin",
+      package: "protractor-multiple-cucumber-html-reporter-plugin",
       options: {
         automaticallyGenerateReport: true,
         removeExistingJsonReportFile: true,
+        durationInMS: true,
+        displayDuration: true,
+        removeOriginalJsonReportFile: true,
+        // reportPath: '../target/cucumber-test-results',
         reportName: "Angular BDD exercise with cucumber"
       }
     }
@@ -53,5 +59,5 @@ exports.config = {
     });
     // browser.driver.manage().window().maximize();
   },
-  
+
 };

@@ -1,7 +1,7 @@
 import { Before, When, Given, Then} from 'cucumber';
 
 import { SubscribeFormPage } from '../pages/subscribeform';
-import { Key } from 'protractor';
+import { Key, by, element } from 'protractor';
 
 var chai = require('chai');
 var chaiAsPromised = require('chai-as-promised');
@@ -102,7 +102,7 @@ Then(/^The submit button enabled is "(.*)" and error will still read "(.*)"$/, (
 // });
 
 When(/^I fill in my "(.*)" and "(.*)"$/, function(username, email, callback){
-    subscribeFormPage.getFirstNameInput().isPresent().then(function(){
+    subscribeFormPage.getFirstNameInput().isPresent().then(() =>{
         subscribeFormPage.getFirstNameInput().sendKeys(username).then(function (){
             subscribeFormPage.getEmailInput().isPresent().then(function (){
                 subscribeFormPage.getEmailInput().sendKeys(email);
@@ -111,8 +111,21 @@ When(/^I fill in my "(.*)" and "(.*)"$/, function(username, email, callback){
     }).then(callback);
 });
 
-Then("I shouldn't be able to click the submit button", async () => {
-    await expect(subscribeFormPage.isSumbitButtonDisabled()).to.eventually.equal("true");
+Then("I shouldn't be able to click the submit button", (callback) => {
+    expect(subscribeFormPage.isSumbitButtonDisabled()).to.eventually.equal("true")
+    .and.notify(callback);
 });
+
+// werkt niet
+// When(/^I can see the (.*) message$/, function(value, callback){
+//     element(by.binding("")).then( (text) =>{
+//         console.log(text + "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,,");
+//     });
+// });
+
+When(/^I can see the (.*) text$/, function (firstname, callback){
+    expect(element(by.cssContainingText("mat-label",firstname)).isPresent())
+    .to.eventually.true.and.notify(callback);
+})
 
 

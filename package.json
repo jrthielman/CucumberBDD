@@ -56,6 +56,7 @@
     "multiple-cucumber-html-reporter": "^1.11.6",
     "protractor": "~5.4.0",
     "protractor-html-screenshot-reporter": "0.0.21",
+    "protractor-multiple-cucumber-html-reporter-plugin": "^1.8.0",
     "protractor-simple-cucumber-html-reporter-plugin": "^1.0.0",
     "serenity-js": "^1.10.13",
     "ts-node": "~7.0.0",

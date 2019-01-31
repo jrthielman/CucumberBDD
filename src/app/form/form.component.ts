@@ -12,6 +12,8 @@ export class FormComponent implements OnInit {
 
   subscribeForm: SubscribeForm = new SubscribeForm();
 
+  text: string = "dit is tekst";
+
   email = new FormControl('', [Validators.required, Validators.email]);
   firstName = new FormControl('', [Validators.required]);
   surname = new FormControl('', [Validators.required]);

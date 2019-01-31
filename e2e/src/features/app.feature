@@ -45,10 +45,15 @@ Feature: subscribe to page
     # |   #1D6B72     |
     # |   #9FD6DB     |
 
-    Scenario: I fill in the form to subscribe
+    # Scenario: I fill in the form to subscribe
+    # Given I am on the subscribe page
+    # When I fill in my "username" and "ditmail@mail.com"
+    # Then I shouldn't be able to click the submit button
+
+    Scenario: Is the username text visible
     Given I am on the subscribe page
-    When I fill in my "username" and "ditmail@mail.com"
-    Then I shouldn't be able to click the submit button
+    When I can see the text message
+    When I can see the Firstname text
 
     # Scenario: passing a parameter
     # Given I am on the subscribe page

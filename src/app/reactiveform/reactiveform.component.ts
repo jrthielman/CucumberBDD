@@ -79,7 +79,7 @@ export class ReactiveformComponent implements OnInit {
   onSubmit(){
     // dit geeft alle waardes uit het formulier
     alert("check the console to see the form info")
-    console.log(this.registrationForm.value);
+    console.log(this.registrationForm.get('userName').value);
   }
   
   loadApiData(): void{
