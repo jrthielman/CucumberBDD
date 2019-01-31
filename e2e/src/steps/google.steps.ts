@@ -31,9 +31,11 @@ When(/^I type "(.*)" into the search field and press enter$/, (searchVal, callba
     expect(googlePage.getSearchField().isPresent()).to.eventually.be.true.then(() =>{
         googlePage.getSearchField().sendKeys(searchVal).then(() => {
             expect(googlePage.getEnterButton().isPresent()).to.eventually.be.true.then(() => {
-                googlePage.getEnterButton().click();
-            })
-        })
+                expect(googlePage.getEnterButton().isPresent()).to.eventually.be.true.then(() => {
+                    googlePage.getEnterButton().click();
+                });
+            });
+        });
     }).then(callback);
 
 });

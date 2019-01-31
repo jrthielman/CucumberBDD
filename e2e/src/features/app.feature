@@ -52,7 +52,7 @@ Feature: subscribe to page
 
     Scenario: Is the username text visible
     Given I am on the subscribe page
-    When I can see the text message
+    # When I can see the text message
     When I can see the Firstname text
 
     # Scenario: passing a parameter

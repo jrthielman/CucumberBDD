@@ -125,7 +125,7 @@ Then("I shouldn't be able to click the submit button", (callback) => {
 
 When(/^I can see the (.*) text$/, function (firstname, callback){
     expect(element(by.cssContainingText("mat-label",firstname)).isPresent())
-    .to.eventually.true.and.notify(callback);
+    .to.eventually.be.true.and.notify(callback);
 })
 
 
