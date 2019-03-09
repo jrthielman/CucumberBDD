@@ -5,23 +5,22 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
 
   color: string;
 
-  constructor(){}
+  constructor() { }
 
-  ngOnInit(){
-    this.color = sessionStorage.getItem("colorValue"); 
+  ngOnInit() {
+      this.color = sessionStorage.getItem("colorValue");
   }
 
-  private delay(ms: number)
-  {
+  private delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   async getRandomColor() {
-    for(let i = 0; i < 50; i++){
+    for (let i = 0; i < 50; i++) {
       let letters = '0123456789ABCDEF';
       let color = '#';
       for (let i = 0; i < 6; i++) {
@@ -33,11 +32,11 @@ export class AppComponent implements OnInit{
     this.saveColor();
   }
 
-  saveColor(){
+  saveColor() {
     sessionStorage.setItem("colorValue", this.color);
   }
 
-  resetColor(){
+  resetColor() {
     sessionStorage.clear();
     this.color = "";
   }
